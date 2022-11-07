@@ -1,1 +1,1 @@
-# 不審者情報　データ取得・書き出し
+# fushin-sha lambda in aws.

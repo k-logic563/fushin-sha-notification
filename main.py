@@ -1,42 +1,35 @@
-import requests
 import json
+import boto3
+import requests
 from bs4 import BeautifulSoup
 
-props = [
-    {
-        'key': 'information',
-        'url': 'https://fushinsha-joho.co.jp/search.cgi?pref=広島県',
-    },
-    {
-        'key': 'comment',
-        'url': 'https://fushinsha-joho.co.jp/serif.cgi',
-    }
-]
+bucket_name = 'fushinsha-log'
+object_key_name = 'data.json'
 
-data = {
-    'information': [],
-    'comment': []
+json_data = {
+    'data': [],
 }
 
-for prop in props :
-    # 不審者情報
-    res = requests.get(prop['url'])
+def lambda_handler(event, context):
+    # s3初期化
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket_name)
+    obj = bucket.Object(object_key_name)
+    # データ取得
+    res = requests.get('https://fushinsha-joho.co.jp/search.cgi?pref=広島県')
     soup = BeautifulSoup( res.text, 'html.parser' )
-
     headlines = soup.find_all('a', class_='headline')
-
     for link in headlines :
         href = link.get('href')
         title = link.text
-        
-        if prop['key'] == 'comment' :
-            title = title.replace('\t', '').strip()
-        
         payload = {
             'href': href,
             'title': title,
         }
-        data[prop['key']].append(payload)
+        json_data['data'].append(payload)
+    # s3オブジェクトへ書き込み
+    r = obj.put(Body = json.dumps(json_data))
 
-with open('data.json', mode = 'wt', encoding = 'utf-8') as file:
-    json.dump(data, file, ensure_ascii = False, indent = 2)
+    return {
+        'statusCode': 200,
+    }

@@ -1,1 +1,1 @@
-# fushin-sha lambda in aws.
+# fushin-sha notification in map

@@ -23,8 +23,6 @@ soup = BeautifulSoup( res.text, 'html.parser' )
 data = soup.find_all('a', class_='headline')
 
 for index, row in enumerate(data) :
-    if index == 10 :
-        break
     try :
         _headline = row.text.strip()
         _href = row.get('href')
@@ -52,8 +50,7 @@ pat = r"(?P<use>^.*）)(?P<nouse>\d+)"
 repl = lambda m: m.group('use').swapcase()
 df_merge = df_merge.copy()
 df_merge.loc[:, 'headline'] = df_merge.headline.str.replace(pat, repl)
-# マップ生成
-# 広島県庁を中心に
+# マップ生成 広島県庁を中心に
 map = folium.Map(location=[34.39678032975633, 132.45960985216675], zoom_start = 10)
 
 for i, r in df_merge.iterrows():

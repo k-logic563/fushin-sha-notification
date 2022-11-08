@@ -1,6 +1,9 @@
 # ワークフロー名
 name: test_flow
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '*/3 * * * *'
 

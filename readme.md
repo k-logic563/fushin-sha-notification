@@ -1,1 +1,6 @@
-# fushin-sha notification in map
+# 不審者情報マップ表示
+広島県限定、不審者情報をマップ上にマッピングし、ページ公開する。
+
+## 実行
+毎朝9時取得（GitHub Actions cron）
+

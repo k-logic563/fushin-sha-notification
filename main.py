@@ -46,9 +46,9 @@ for index, row in enumerate(data) :
         headline_list.append(_headline)
         url_list.append(_href)
         address_list.append(_address)
+        time.sleep(3)
     except :
         continue
-    time.sleep(1)
 
 df = pd.DataFrame(
     data = {'headline': headline_list, 'url': url_list, 'address': address_list}

@@ -46,7 +46,7 @@ for index, row in enumerate(data) :
         headline_list.append(_headline)
         url_list.append(_href)
         address_list.append(_address)
-        time.sleep(3)
+        time.sleep(5)
     except :
         continue
 

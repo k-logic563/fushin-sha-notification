@@ -2,7 +2,7 @@ name: buildup
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 21 * * *'
 
 jobs:
   build:
@@ -22,9 +22,9 @@ jobs:
           python main.py
       - name: Commit and Push
         run: |
-          git config user.name "k-logic24"
-          git config user.email "k.log.ic563@gmail.com"
+          git config user.name ${{ env.git_name }}
+          git config user.email ${{ env.git_email }}
           git add .
-          git commit -m "Success to generate map."
+          git commit -m "success to generate map."
           git pull
           git push origin main

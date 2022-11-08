@@ -1,4 +1,4 @@
-name: test_flow
+name: buildup
 on:
   schedule:
     - cron: '0 6 * * *'

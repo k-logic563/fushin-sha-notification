@@ -22,7 +22,9 @@ res = requests.get('https://fushinsha-joho.co.jp/search.cgi?pref=広島県')
 soup = BeautifulSoup( res.text, 'html.parser' )
 data = soup.find_all('a', class_='headline')
 
-for i, row in enumerate(data) :
+for index, row in enumerate(data) :
+    if index == 10 :
+        break
     try :
         _headline = row.text.strip()
         _href = row.get('href')
@@ -33,6 +35,7 @@ for i, row in enumerate(data) :
         address_list.append(_address)
     except :
         continue
+    time.sleep(1)
 
 df = pd.DataFrame(
     data = {'headline': headline_list, 'url': url_list, 'address': address_list}

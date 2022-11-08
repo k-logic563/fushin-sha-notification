@@ -1,10 +1,7 @@
 name: test_flow
 on:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 6 * * *'
 
 jobs:
   build:
@@ -21,4 +18,12 @@ jobs:
           pip install -r requirements.txt
       - name: Run script
         run: |
-          python test.py
+          python main.py
+      - name: Commit and Push
+        run: |
+          git config user.name "k-logic24"
+          git config user.email "k.log.ic563@gmail.com"
+          git add .
+          git commit -m "Success to generate map."
+          git pull
+          git push origin main

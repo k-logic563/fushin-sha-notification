@@ -2,5 +2,5 @@
 広島県限定、不審者情報をマップ上にマッピングし、ページ公開する。
 
 ## 実行
-毎朝9時取得（GitHub Actions cron）
+毎朝9時取得（GitHub Actions cron ※現在停止中）
 

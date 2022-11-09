@@ -25,6 +25,7 @@ def get_address(url):
     # 住所抽出
     pattern = re.compile('^.*）(.*?)(付近)*で.*')
     html = requests.get(url).content.decode('utf-8')
+    time.sleep(5)
     soup2 = BeautifulSoup(html, 'html.parser')
     address = pattern.match(soup2.title.text).group(1)
     #漢数字変換
@@ -46,7 +47,6 @@ for index, row in enumerate(data) :
         headline_list.append(_headline)
         url_list.append(_href)
         address_list.append(_address)
-        time.sleep(5)
     except :
         continue
 
